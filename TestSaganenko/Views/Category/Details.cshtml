@@ -1,0 +1,22 @@
+﻿@model TestSaganenko.Models.Category
+
+@{
+    ViewData["Title"] = Model.Name;
+}
+<h1>@Model.Name</h1>
+<p>@Model.Description</p>
+@foreach (var topic in @Model.Topics)
+           {
+              <div class="topic text-left text-muted border-bottom pt-2">                 
+                  <h4 class="topic_name"><a asp-controller="Topic" asp-action="Details" asp-route-id=@topic.Id><strong class="d-block text-gray-light">@topic.Name</strong></a></h4> 
+                   <p class="pb-3 mb-0 lh-sm">
+                       Author: @topic._user.UserName (@topic.DateTopic.ToShortDateString())
+                   </p>                  
+               </div> 
+           }
+ @if (User.Identity.IsAuthenticated)
+          {
+            <p> 
+                 <a class="btn btn-light" asp-controller="Topic" asp-action="Create" asp-route-id=@Model.Id>Create New topic in this category</a>
+            </p>                            
+          }

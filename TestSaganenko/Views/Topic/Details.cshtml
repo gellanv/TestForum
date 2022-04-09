@@ -1,0 +1,33 @@
+﻿@model TestSaganenko.Models.Topic
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>@Model.Name</h1>
+<p>@Model.Description</p>
+@foreach (var post in @Model.Posts)
+           {
+              <div class="topic text-left text-muted border-bottom pt-2">    
+                  <p class="post-text">@post.TextPost</p>
+                  <p class="pb-3 mb-0 lh-sm">
+                       Author: @post._user.UserName (@post.DatePost.ToShortDateString())
+                   </p>   
+                    @if (User.Identity.IsAuthenticated&&User.Identity.Name==@post._user.UserName)
+                   {
+                    <p> 
+                        <a class="btn btn-light" asp-controller="Post" asp-action="Edit" asp-route-id=@post.Id>Edit</a>
+                        <a class="btn btn-light" asp-controller="Post" asp-action="Delete" asp-route-id=@post.Id>Delete</a>
+                    </p>                            
+                    }
+               </div>               
+           }
+        <div>
+            @if (User.Identity.IsAuthenticated)
+          {             
+            <p> 
+                 <a class="btn btn-light" asp-controller="Post" asp-action="Create" asp-route-id=@Model.Id>Create New post</a>
+            </p>                            
+          }
+            <a asp-controller="Category" asp-action="Details" asp-route-id=@Model.CategoryId>Back to Category</a>
+        </div>

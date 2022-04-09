@@ -1,0 +1,17 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Forum</h1>
+
+    @foreach (var item in @ViewBag.Categories)
+    {
+     <div class="category text-left text-muted pt-3 border-bottom">
+        <div class="pb-3 mb-0 lh-sm">
+        <h3><a href="Category/Details/@item.Id"><strong class="d-block text-gray-light">@item.Name</strong></a></h3>
+        @item.Description<br> 
+        </div>
+     </div> 
+    }
+</div>
